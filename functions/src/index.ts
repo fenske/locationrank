@@ -27,4 +27,5 @@ export const updateCampaignProgress = functions.https.onRequest((request, respon
             return response.status(500).send()
         })
     }
+    return response.status(200).send()
 });
