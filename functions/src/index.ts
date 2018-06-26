@@ -51,3 +51,22 @@ export const updateCampaignProgress = functions.https.onRequest((request, respon
     }
     return response.status(200).send()
 });
+
+export const createUser = functions.firestore
+    .document('users/{userId}')
+    .onCreate((snap, context) => {
+        console.info("At least triggered")
+        const initialCampaigns = {
+            "campaign-id-1": {
+                places: {
+                    "radar-id-1": {
+                        visited: 0
+                    },
+                    "radar-id-2": {
+                        visited: 0
+                    }
+                }
+            }
+        }
+        return snap.ref.set({ campaigns: initialCampaigns });
+    });
